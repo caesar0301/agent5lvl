@@ -1,0 +1,1068 @@
+app:
+  description: 利用Reasoning+Reaction (ReAct)流程，完成对用户给定问题的深度研究和探索，将结果输出成报告。
+  icon: 🔍
+  icon_background: '#D1E9FF'
+  mode: advanced-chat
+  name: LV3_深度研究
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/tongyi:0.0.25@2b6f549753c8fe1b8d0bda620eb0611b549d6d809da691baf0692ee75f6c507f
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/json_process:0.0.2@dde6d7b676ccdcea89206d29232181a840170c19277d3d978e27cd1e3c92c707
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openai:0.0.26@c1e643ac6a7732f6333a783320b4d3026fa5e31d8e7026375b98d44418d33f26
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/tavily:0.0.5@7f277f7a63e36b1b3e9ed53e55daab0b281599d14902664bade86215f5374f06
+kind: app
+version: 0.3.0
+workflow:
+  conversation_variables:
+  - description: ''
+    id: 07ea9b5b-edf2-471d-8206-50e95e7ab87e
+    name: topics
+    selector:
+    - conversation
+    - topics
+    value: []
+    value_type: array[string]
+  - description: ''
+    id: a9049588-f66f-4c3a-a30e-5952a677baa9
+    name: nextSearchTopic
+    selector:
+    - conversation
+    - nextSearchTopic
+    value: ''
+    value_type: string
+  - description: ''
+    id: 2e0a2539-345c-4723-8b1b-b653e1a0caef
+    name: findings
+    selector:
+    - conversation
+    - findings
+    value: []
+    value_type: array[string]
+  - description: ''
+    id: 23d208d1-a50d-468c-8757-ad49da0886e1
+    name: shouldContinue
+    selector:
+    - conversation
+    - shouldContinue
+    value: 'true'
+    value_type: string
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: true
+        iteration_id: '1739244888446'
+        sourceType: iteration-start
+        targetType: llm
+      id: 1739244888446start-source-1739245286499-target
+      selected: false
+      source: 1739244888446start
+      sourceHandle: source
+      target: '1739245286499'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        iteration_id: '1739244888446'
+        sourceType: llm
+        targetType: tool
+      id: 1739245286499-source-1739245446901-target
+      selected: false
+      source: '1739245286499'
+      sourceHandle: source
+      target: '1739245446901'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        iteration_id: '1739244888446'
+        sourceType: llm
+        targetType: tool
+      id: 1739245286499-source-1739245524260-target
+      selected: false
+      source: '1739245286499'
+      sourceHandle: source
+      target: '1739245524260'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: code
+      id: 1739229221219-source-1739245548624-target
+      selected: false
+      source: '1739229221219'
+      sourceHandle: source
+      target: '1739245548624'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: iteration
+      id: 1739245548624-source-1739244888446-target
+      selected: false
+      source: '1739245548624'
+      sourceHandle: source
+      target: '1739244888446'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: true
+        iteration_id: '1739244888446'
+        sourceType: if-else
+        targetType: tool
+      id: 1739245723720-true-1739245424964-target
+      selected: false
+      source: '1739245723720'
+      sourceHandle: 'true'
+      target: '1739245424964'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        iteration_id: '1739244888446'
+        sourceType: tool
+        targetType: assigner
+      id: 1739245446901-source-1739245826988-target
+      selected: false
+      source: '1739245446901'
+      sourceHandle: source
+      target: '1739245826988'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        iteration_id: '1739244888446'
+        sourceType: tool
+        targetType: assigner
+      id: 1739245424964-source-1739246085820-target
+      selected: false
+      source: '1739245424964'
+      sourceHandle: source
+      target: '1739246085820'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: false
+        sourceType: iteration
+        targetType: llm
+      id: 1739244888446-source-1739246156652-target
+      selected: false
+      source: '1739244888446'
+      sourceHandle: source
+      target: '1739246156652'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: answer
+      id: 1739246156652-source-answer-target
+      selected: false
+      source: '1739246156652'
+      sourceHandle: source
+      target: answer
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: true
+        iteration_id: '1739244888446'
+        sourceType: tool
+        targetType: assigner
+      id: 1739245524260-source-1739245826988-target
+      selected: false
+      source: '1739245524260'
+      sourceHandle: source
+      target: '1739245826988'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        iteration_id: '1739244888446'
+        sourceType: assigner
+        targetType: if-else
+      id: 1739245826988-source-1739245723720-target
+      selected: false
+      source: '1739245826988'
+      sourceHandle: source
+      target: '1739245723720'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        iteration_id: '1739244888446'
+        sourceType: assigner
+        targetType: template-transform
+      id: 1739246085820-source-1739254060247-target
+      selected: false
+      source: '1739246085820'
+      sourceHandle: source
+      target: '1739254060247'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        iteration_id: '1739244888446'
+        sourceType: template-transform
+        targetType: variable-aggregator
+      id: 1739254060247-source-1739254296073-target
+      selected: false
+      source: '1739254060247'
+      sourceHandle: source
+      target: '1739254296073'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        iteration_id: '1739244888446'
+        sourceType: variable-aggregator
+        targetType: answer
+      id: 1739254296073-source-1739253994297-target
+      selected: false
+      source: '1739254296073'
+      sourceHandle: source
+      target: '1739253994297'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        iteration_id: '1739244888446'
+        sourceType: if-else
+        targetType: template-transform
+      id: 1739245723720-false-1739254516383-target
+      selected: false
+      source: '1739245723720'
+      sourceHandle: 'false'
+      target: '1739254516383'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        iteration_id: '1739244888446'
+        sourceType: template-transform
+        targetType: variable-aggregator
+      id: 1739254516383-source-1739254296073-target
+      selected: false
+      source: '1739254516383'
+      sourceHandle: source
+      target: '1739254296073'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: depth
+          max_length: 48
+          options: []
+          required: false
+          type: number
+          variable: depth
+      height: 90
+      id: '1739229221219'
+      position:
+        x: 366.31402428155843
+        y: 451.3953252394805
+      positionAbsolute:
+        x: 366.31402428155843
+        y: 451.3953252394805
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '
+
+          {{#1739246156652.text#}}'
+        desc: ''
+        selected: false
+        title: 回答
+        type: answer
+        variables: []
+      height: 105
+      id: answer
+      position:
+        x: 1858.4472130110016
+        y: 676.2043901579685
+      positionAbsolute:
+        x: 1858.4472130110016
+        y: 676.2043901579685
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        error_handle_mode: terminated
+        height: 1042
+        is_parallel: false
+        iterator_selector:
+        - '1739245548624'
+        - array
+        output_selector:
+        - '1739254296073'
+        - output
+        output_type: array[string]
+        parallel_nums: 10
+        selected: false
+        start_node_id: 1739244888446start
+        title: 迭代
+        type: iteration
+        width: 1186
+      height: 1042
+      id: '1739244888446'
+      position:
+        x: 650.8824354561594
+        y: 550.399123970737
+      positionAbsolute:
+        x: 650.8824354561594
+        y: 550.399123970737
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 1186
+      zIndex: 1
+    - data:
+        desc: ''
+        isInIteration: true
+        selected: false
+        title: ''
+        type: iteration-start
+      draggable: false
+      height: 48
+      id: 1739244888446start
+      parentId: '1739244888446'
+      position:
+        x: 24
+        y: 68
+      positionAbsolute:
+        x: 674.8824354561594
+        y: 618.399123970737
+      selectable: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-iteration-start
+      width: 44
+      zIndex: 1002
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        isInIteration: true
+        iteration_id: '1739244888446'
+        memory:
+          query_prompt_template: '## 主题
+
+            {{#sys.query#}}
+
+
+            ## 当前发现
+
+            {{#conversation.findings#}}
+
+
+            ## 已搜索的主题
+
+            {{#conversation.topics#}}
+
+
+            '
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 50
+        model:
+          completion_params:
+            response_format: json_object
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 2acdb5a9-823a-4ce3-8dbe-401540a61bc5
+          role: system
+          text: "您是一个研究代理，负责调查以下主题。\n您发现了什么？还有哪些问题尚未解答？下一步应该调查哪些具体方面？\n\n## 输出\n-\
+            \ 请不要输出与已搜索主题完全相同的主题\n- 如果需要进一步搜索信息，请设置nextSearchTopic\n- 如果已获得足够信息，请将shouldContinue设置为false\n\
+            - 请以json格式输出\n\n```json\nnextSearchTopic: str | None\nshouldContinue:\
+            \ bool \n```\n\n\n"
+        selected: false
+        title: LLM
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1739245286499'
+      parentId: '1739244888446'
+      position:
+        x: 128
+        y: 67.17608171067138
+      positionAbsolute:
+        x: 778.8824354561594
+        y: 617.5752056814084
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        desc: ''
+        isInIteration: true
+        iteration_id: '1739244888446'
+        provider_id: tavily
+        provider_name: tavily
+        provider_type: builtin
+        selected: false
+        title: Tavily Search
+        tool_configurations:
+          days: 3
+          exclude_domains: null
+          include_answer: 0
+          include_domains: null
+          include_image_descriptions: 0
+          include_images: 0
+          include_raw_content: 0
+          max_results: 5
+          search_depth: advanced
+          topic: general
+        tool_label: Tavily Search
+        tool_name: tavily_search
+        tool_parameters:
+          query:
+            type: mixed
+            value: '{{#conversation.nextSearchTopic#}}'
+        type: tool
+      height: 324
+      id: '1739245424964'
+      parentId: '1739244888446'
+      position:
+        x: 326.22599578713334
+        y: 498.438562962014
+      positionAbsolute:
+        x: 977.1084312432928
+        y: 1048.837686932751
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        desc: ''
+        isInIteration: true
+        iteration_id: '1739244888446'
+        provider_id: json_process
+        provider_name: json_process
+        provider_type: builtin
+        selected: false
+        title: 提取nextSearchTopic
+        tool_configurations:
+          ensure_ascii: 1
+        tool_label: JSON Parse
+        tool_name: parse
+        tool_parameters:
+          content:
+            type: mixed
+            value: '{{#1739245286499.text#}}'
+          json_filter:
+            type: mixed
+            value: nextSearchTopic
+        type: tool
+      height: 90
+      id: '1739245446901'
+      parentId: '1739244888446'
+      position:
+        x: 478.0355485197764
+        y: 67.60378822582845
+      positionAbsolute:
+        x: 1128.9179839759358
+        y: 618.0029121965655
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        desc: ''
+        isInIteration: true
+        iteration_id: '1739244888446'
+        provider_id: json_process
+        provider_name: json_process
+        provider_type: builtin
+        selected: false
+        title: 提取shouldContinue
+        tool_configurations:
+          ensure_ascii: 1
+        tool_label: JSON Parse
+        tool_name: parse
+        tool_parameters:
+          content:
+            type: mixed
+            value: '{{#1739245286499.text#}}'
+          json_filter:
+            type: mixed
+            value: shouldContinue
+        type: tool
+      height: 90
+      id: '1739245524260'
+      parentId: '1739244888446'
+      position:
+        x: 476.0996498693788
+        y: 199.712905031844
+      positionAbsolute:
+        x: 1126.9820853255383
+        y: 750.112029002581
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        code: "\ndef main(depth: int) -> dict:\n    depth = depth or 3\n    array\
+          \ = list(range(depth))\n    return {\n        \"array\": array,\n      \
+          \  \"depth\": depth\n    }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          array:
+            children: null
+            type: array[number]
+          depth:
+            children: null
+            type: number
+        selected: false
+        title: 创建数组
+        type: code
+        variables:
+        - value_selector:
+          - '1739229221219'
+          - depth
+          variable: depth
+      height: 54
+      id: '1739245548624'
+      position:
+        x: 371.36822492017325
+        y: 563.5
+      positionAbsolute:
+        x: 371.36822492017325
+        y: 563.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: is
+            id: b3169e80-3090-4a5b-8df4-3148d7afcb4d
+            value: 'True'
+            varType: string
+            variable_selector:
+            - '1739245524260'
+            - text
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        isInIteration: true
+        iteration_id: '1739244888446'
+        selected: false
+        title: IF/ELSE
+        type: if-else
+      height: 126
+      id: '1739245723720'
+      parentId: '1739244888446'
+      position:
+        x: 48.74608363090499
+        y: 534.403100663696
+      positionAbsolute:
+        x: 699.6285190870644
+        y: 1084.802224634433
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        desc: ''
+        isInIteration: true
+        items:
+        - input_type: variable
+          operation: over-write
+          value:
+          - '1739245446901'
+          - text
+          variable_selector:
+          - conversation
+          - nextSearchTopic
+          write_mode: over-write
+        - input_type: variable
+          operation: over-write
+          value:
+          - '1739245524260'
+          - text
+          variable_selector:
+          - conversation
+          - shouldContinue
+          write_mode: over-write
+        - input_type: variable
+          operation: append
+          value:
+          - conversation
+          - nextSearchTopic
+          variable_selector:
+          - conversation
+          - topics
+          write_mode: over-write
+        iteration_id: '1739244888446'
+        selected: false
+        title: 变量赋值
+        type: assigner
+        version: '2'
+      height: 144
+      id: '1739245826988'
+      parentId: '1739244888446'
+      position:
+        x: 907.2974802709019
+        y: 65
+      positionAbsolute:
+        x: 1558.1799157270614
+        y: 615.399123970737
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        desc: ''
+        isInIteration: true
+        items:
+        - input_type: variable
+          operation: append
+          value:
+          - '1739245424964'
+          - text
+          variable_selector:
+          - conversation
+          - findings
+          write_mode: over-write
+        iteration_id: '1739244888446'
+        selected: false
+        title: 变量赋值
+        type: assigner
+        version: '2'
+      height: 88
+      id: '1739246085820'
+      parentId: '1739244888446'
+      position:
+        x: 606.0088891085952
+        y: 628.4868835893722
+      positionAbsolute:
+        x: 1256.8913245647545
+        y: 1178.8860075601092
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        memory:
+          query_prompt_template: "## topic\n{{#sys.query#}}\n\n# findings \n{{#conversation.findings#}}\n"
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 50
+        model:
+          completion_params: {}
+          mode: chat
+          name: qwen3-14b
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 89c17d58-6a63-4f4f-98fe-f6534ec1ecb0
+          role: system
+          text: ' 以下的调查结果总结
+
+            重要的洞察、结论和剩余的不确定性。适当引用来源。该总结中等详细，总结不能太长。
+
+            以Markdown格式输出。
+
+            用户在{{#sys.query#}}使用哪种语言，就用那种语言回答。'
+        selected: false
+        title: Reasoning Model
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1739246156652'
+      position:
+        x: 1858.4472130110016
+        y: 563.5
+      positionAbsolute:
+        x: 1858.4472130110016
+        y: 563.5
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#1739254296073.output#}}'
+        desc: ''
+        isInIteration: true
+        iteration_id: '1739244888446'
+        selected: false
+        title: 回答
+        type: answer
+        variables: []
+      height: 105
+      id: '1739253994297'
+      parentId: '1739244888446'
+      position:
+        x: 906.5415537904462
+        y: 878.1347002855746
+      positionAbsolute:
+        x: 1557.4239892466057
+        y: 1428.5338242563116
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        desc: ''
+        isInIteration: true
+        iteration_id: '1739244888446'
+        selected: false
+        template: '当前迭代深度：{{ index + 1 }}/{{ depth }}
+
+
+          '
+        title: 中度敏感格式输出
+        type: template-transform
+        variables:
+        - value_selector:
+          - '1739244888446'
+          - index
+          variable: index
+        - value_selector:
+          - '1739229221219'
+          - depth
+          variable: depth
+      height: 54
+      id: '1739254060247'
+      parentId: '1739244888446'
+      position:
+        x: 867.6964657330811
+        y: 631.2310099968581
+      positionAbsolute:
+        x: 1518.5789011892407
+        y: 1181.6301339675952
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        desc: ''
+        isInIteration: true
+        iteration_id: '1739244888446'
+        output_type: string
+        selected: false
+        title: 变量聚合器
+        type: variable-aggregator
+        variables:
+        - - '1739254060247'
+          - output
+        - - '1739254516383'
+          - output
+      height: 130
+      id: '1739254296073'
+      parentId: '1739244888446'
+      position:
+        x: 640.0246481283732
+        y: 876.3796107886387
+      positionAbsolute:
+        x: 1290.9070835845328
+        y: 1426.7787347593758
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        desc: ''
+        isInIteration: true
+        iteration_id: '1739244888446'
+        selected: false
+        template: ' '
+        title: 空白
+        type: template-transform
+        variables: []
+      height: 54
+      id: '1739254516383'
+      parentId: '1739244888446'
+      position:
+        x: 325.67632971971057
+        y: 879.2385925098547
+      positionAbsolute:
+        x: 976.55876517587
+        y: 1429.6377164805917
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        author: stvlynn
+        desc: ''
+        height: 371
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"深度研究","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"作者：","type":"text","version":1},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"岸田崇史","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"link","version":1,"rel":"noreferrer","target":null,"title":null,"url":"https://x.com/omluc_ai"},{"detail":0,"format":0,"mode":"normal","style":"","text":"
+          https://x.com/omluc_ai","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"只需输入想要搜索的内容，系统就会反复执行搜索并生成报告。","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"用户输入：用户输入初始问题(sys.query)和研究深度(depth)。","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"搜索初始化：使用GPT-4o分析初始问题，提取搜索主题，并判断是否需要继续搜索。","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"listitem","version":1,"value":1}],"direction":"ltr","format":"","indent":0,"type":"list","version":1,"listType":"bullet","start":1,"tag":"ul"},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"迭代搜索：根据设定的深度(depth)进行多次迭代搜索。","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"listitem","version":1,"value":1}],"direction":"ltr","format":"","indent":0,"type":"list","version":1,"listType":"bullet","start":1,"tag":"ul"},{"children":[],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"每次迭代都使用Tavily搜索引擎，基于之前提取的搜索主题进行搜索并收集搜索结果。","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"通过大语言模型判断是否需要继续搜索，控制迭代过程。","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"listitem","version":1,"value":1}],"direction":"ltr","format":"","indent":0,"type":"list","version":1,"listType":"bullet","start":1,"tag":"ul"},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"分析和总结：当迭代搜索结束时（或判断不需要继续搜索时），使用deepseek-reasoner模型对收集的所有搜索结果进行全面分析和总结。","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"listitem","version":1,"value":1}],"direction":"ltr","format":"","indent":0,"type":"list","version":1,"listType":"bullet","start":1,"tag":"ul"},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"生成报告：将分析结果以Markdown格式生成最终报告并输出。","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"listitem","version":1,"value":1}],"direction":"ltr","format":"","indent":0,"type":"list","version":1,"listType":"bullet","start":1,"tag":"ul"}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ''
+        type: ''
+        width: 798
+      height: 371
+      id: '1739283628844'
+      position:
+        x: 342.95357738991356
+        y: 24.07121075782824
+      positionAbsolute:
+        x: 342.95357738991356
+        y: 24.07121075782824
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 798
+    - data:
+        author: stvlynn
+        desc: ''
+        height: 227
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"main函数接收一个表示深度的整数，并返回一个包含列表和最终深度值的字典。","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"array
+          = list(range(depth))：range(depth)创建一个从0到depth-1的整数序列。list()函数将此序列转换为列表。例如，当depth为3时，array变为[0,
+          1, 2]。","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"listitem","version":1,"value":1}],"direction":"ltr","format":"","indent":0,"type":"list","version":1,"listType":"bullet","start":1,"tag":"ul"}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ''
+        type: ''
+        width: 265
+      height: 227
+      id: '1739283923251'
+      position:
+        x: 85.35900567854111
+        y: 550.399123970737
+      positionAbsolute:
+        x: 85.35900567854111
+        y: 550.399123970737
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 265
+    - data:
+        author: stvlynn
+        desc: ''
+        height: 122
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"使用GPT-4o模型分析用户的初始查询，提取搜索关键词和主题，并判断是否需要进行下一步搜索。输出结果为JSON格式的文本。","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ''
+        type: ''
+        width: 350
+      height: 122
+      id: '1739285077334'
+      position:
+        x: 767.4101132247814
+        y: 414.07344666575716
+      positionAbsolute:
+        x: 767.4101132247814
+        y: 414.07344666575716
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 350
+    - data:
+        author: stvlynn
+        desc: ''
+        height: 88
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"从
+          \"LLM\" 节点输出的 JSON 文本中提取 nextSearchTopic 字段的值。","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ''
+        type: ''
+        width: 240
+      height: 88
+      id: '1739285156227'
+      position:
+        x: 392.6233739231274
+        y: 790.0751712082184
+      positionAbsolute:
+        x: 392.6233739231274
+        y: 790.0751712082184
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 240
+    - data:
+        author: stvlynn
+        desc: ''
+        height: 88
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"从
+          \"LLM\" 节点输出的 JSON 文本中提取 shouldContinue 字段的值。","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ''
+        type: ''
+        width: 240
+      height: 88
+      id: '1739285211334'
+      position:
+        x: 385.9489605255146
+        y: 921.3386346946035
+      positionAbsolute:
+        x: 385.9489605255146
+        y: 921.3386346946035
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 240
+    - data:
+        author: stvlynn
+        desc: ''
+        height: 140
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"使用从
+          \"EXTRACT NEXTSEARCHTOPIC\" 和 \"EXTRACT SHOULDCONTINUE\" 节点提取的值分别覆盖 nextSearchTopic 和 shouldContinue 变量。","type":"text","version":1}],"direction":"ltr","format":"left","indent":0,"type":"listitem","version":1,"value":1},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"将 nextSearchTopic 的值 ","type":"text","version":1},{"detail":0,"format":1,"mode":"normal","style":"","text":"追加","type":"text","version":1},{"detail":0,"format":0,"mode":"normal","style":"","text":" 到 topics 数组中，形成一个搜索主题列表。","type":"text","version":1}],"direction":"ltr","format":"left","indent":0,"type":"listitem","version":1,"value":2}],"direction":"ltr","format":"","indent":0,"type":"list","version":1,"listType":"bullet","start":1,"tag":"ul"},{"children":[],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ''
+        type: ''
+        width: 433
+      height: 140
+      id: '1739285254837'
+      position:
+        x: 1330.3784562877254
+        y: 402.9591941466761
+      positionAbsolute:
+        x: 1330.3784562877254
+        y: 402.9591941466761
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 433
+    viewport:
+      x: 132.4636529935517
+      y: 16.524023745758882
+      zoom: 0.7725711329009549
