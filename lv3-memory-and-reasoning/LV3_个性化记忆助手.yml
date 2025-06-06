@@ -1,0 +1,797 @@
+app:
+  description: 展示Agent如何使用Memory机制，将上下文记忆存储并在对话中引用。
+  icon: 📝
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: LV3_个性化记忆助手
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/tongyi:0.0.25@2b6f549753c8fe1b8d0bda620eb0611b549d6d809da691baf0692ee75f6c507f
+kind: app
+version: 0.3.0
+workflow:
+  conversation_variables:
+  - description: ''
+    id: bacbfac5-a1da-420e-a022-7f90d554da80
+    name: memory
+    selector:
+    - conversation
+    - memory
+    value: []
+    value_type: array[object]
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: false
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: llm
+      id: 1723433389887-source-1723439627061-target
+      selected: false
+      source: '1723433389887'
+      sourceHandle: source
+      target: '1723439627061'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: if-else
+      id: 1723439627061-source-1723440384014-target
+      selected: false
+      source: '1723439627061'
+      sourceHandle: source
+      target: '1723440384014'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetType: llm
+      id: 1723440384014-true-1723440416057-target
+      selected: false
+      source: '1723440384014'
+      sourceHandle: 'true'
+      target: '1723440416057'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: code
+      id: 1723440416057-source-1723441002334-target
+      selected: false
+      source: '1723440416057'
+      sourceHandle: source
+      target: '1723441002334'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: assigner
+      id: 1723441002334-source-1723440950024-target
+      selected: false
+      source: '1723441002334'
+      sourceHandle: source
+      target: '1723440950024'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: answer
+      id: 1723442720119-source-answer-target
+      selected: false
+      source: '1723442720119'
+      sourceHandle: source
+      target: answer
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: answer
+      id: 17234428530880-source-17234428657830-target
+      selected: false
+      source: '17234428530880'
+      sourceHandle: source
+      target: '17234428657830'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetType: code
+      id: 1723440384014-false-1723443740666-target
+      selected: false
+      source: '1723440384014'
+      sourceHandle: 'false'
+      target: '1723443740666'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: llm
+      id: 1723443740666-source-17234428530880-target
+      selected: false
+      source: '1723443740666'
+      sourceHandle: source
+      target: '17234428530880'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: assigner
+        targetType: code
+      id: 1723440950024-source-1723444029520-target
+      selected: false
+      source: '1723440950024'
+      sourceHandle: source
+      target: '1723444029520'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: llm
+      id: 1723444029520-source-1723442720119-target
+      selected: false
+      source: '1723444029520'
+      sourceHandle: source
+      target: '1723442720119'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables: []
+      height: 54
+      id: '1723433389887'
+      position:
+        x: 30
+        y: 266
+      positionAbsolute:
+        x: 30
+        y: 266
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#1723442720119.text#}}'
+        desc: ''
+        selected: false
+        title: Answer（2）
+        type: answer
+        variables: []
+      height: 105
+      id: answer
+      position:
+        x: 2462
+        y: 266
+      positionAbsolute:
+        x: 2462
+        y: 266
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            enable_thinking: false
+          mode: chat
+          name: qwen3-8b
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 4447a6dc-5818-47ff-9b4d-a64792e4e8dc
+          role: system
+          text: "确定 {{#sys.query#}} 中是否有需要存储为记忆的信息。\n记忆的定义：从提供的文本中推断出事实、偏好和记忆。推断事实、偏好和记忆的约束：\
+            \ \n- 事实、偏好和记忆应该简洁且信息丰富。 \n- 不要以“这个人喜欢披萨”开头。而是以“喜欢披萨”开头。 \n- 不要记住提供的用户/代理详细信息。只记住事实、偏好和记忆。\n\
+            输出：\n用一个词输出 Yes 或 No"
+        selected: false
+        title: 判断 query 是否存在需要记忆的部分
+        type: llm
+        variables: []
+        vision:
+          configs:
+            detail: high
+          enabled: false
+      height: 90
+      id: '1723439627061'
+      position:
+        x: 334
+        y: 266
+      positionAbsolute:
+        x: 334
+        y: 266
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: contains
+            id: ce01e29b-8afa-42c9-9cd0-16aa9c3dc06e
+            value: 'Yes'
+            varType: string
+            variable_selector:
+            - '1723439627061'
+            - text
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 条件分支
+        type: if-else
+      height: 126
+      id: '1723440384014'
+      position:
+        x: 638
+        y: 266
+      positionAbsolute:
+        x: 638
+        y: 266
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            enable_thinking: false
+          mode: chat
+          name: qwen3-14b
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: c99691e0-c192-4f14-8caa-3ea897c01bea
+          role: system
+          text: '"""
+
+            从 {{#sys.query#}} 推断事实、偏好和记忆
+
+            只需以项目符号形式返回事实、偏好和记忆：
+
+            自然语言文本：{user_input}
+
+            用户/代理详细信息：{metadata}
+
+
+            推断事实、偏好和记忆的约束：
+
+            - 事实、偏好和记忆应简洁明了。
+
+            - 不要以“此人喜欢披萨”开头。相反，以“喜欢披萨”开头。
+
+            - 不要记住提供的用户/代理详细信息。只记住事实、偏好和记忆。
+
+
+            推断的事实、偏好和记忆：
+
+            输出格式示例：
+
+            {
+
+            "memory": {
+
+            "facts": [
+
+            "两个人：Ray 和 Lily",
+
+            "Ray 20 岁",
+
+            "Lily 18 岁",
+
+            "Lily 的名字包含汉字‘利利’"
+
+            ],
+
+            "preferences": [],
+
+            "memories": []
+
+            }
+
+            }
+
+            """'
+        selected: false
+        title: 提取记忆
+        type: llm
+        variables: []
+        vision:
+          configs:
+            detail: high
+          enabled: false
+      height: 90
+      id: '1723440416057'
+      position:
+        x: 942
+        y: 266
+      positionAbsolute:
+        x: 942
+        y: 266
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        assigned_variable_selector:
+        - conversation
+        - memory
+        desc: ''
+        input_variable_selector:
+        - '1723441002334'
+        - mem
+        selected: false
+        title: 将提取的记忆写入会话变量
+        type: assigner
+        write_mode: append
+      height: 88
+      id: '1723440950024'
+      position:
+        x: 1550
+        y: 266
+      positionAbsolute:
+        x: 1550
+        y: 266
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\n\ndef main(arg1: str) -> object:\n    try:\n        #\
+          \ Parse the input JSON string\n        input_data = json.loads(arg1)\n \
+          \       \n        # Extract the memory object\n        memory = input_data.get(\"\
+          memory\", {})\n        \n        # Construct the return object\n       \
+          \ result = {\n            \"facts\": memory.get(\"facts\", []),\n      \
+          \      \"preferences\": memory.get(\"preferences\", []),\n            \"\
+          memories\": memory.get(\"memories\", [])\n        }\n        \n        return\
+          \ {\n            \"mem\": result\n        }\n    except json.JSONDecodeError:\n\
+          \        return {\n            \"result\": \"Error: Invalid JSON string\"\
+          \n        }\n    except Exception as e:\n        return {\n            \"\
+          result\": f\"Error: {str(e)}\"\n        }"
+        code_language: python3
+        desc: ''
+        outputs:
+          mem:
+            children: null
+            type: object
+        selected: false
+        title: 将字符串转义为 object
+        type: code
+        variables:
+        - value_selector:
+          - '1723440416057'
+          - text
+          variable: arg1
+      height: 54
+      id: '1723441002334'
+      position:
+        x: 1246
+        y: 266
+      positionAbsolute:
+        x: 1246
+        y: 266
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        memory:
+          query_prompt_template: ''
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: true
+            size: 10
+        model:
+          completion_params: {}
+          mode: chat
+          name: qwen3-14b
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: c162dbfd-5159-4df9-9e06-9d638522c6be
+          role: system
+          text: "您是根据提供的记忆回答 {{#sys.query#}} 的专家。您的任务是利用 {{#1723444029520.result#}}\
+            \ 中提供的信息为问题提供准确而简洁的答案。\n指导原则： \n- 根据问题从记忆中提取相关信息。 \n- 如果未找到相关信息，请确保您不会说未找到任何信息。相反，接受问题并提供一般性答复。\
+            \ \n- 确保答案清晰、简洁并直接解决问题。\n\n确保响应的语言与 {{#sys.query#}} 一致。"
+        selected: false
+        title: 根据记忆回复
+        type: llm
+        variables: []
+        vision:
+          configs:
+            detail: high
+          enabled: false
+      height: 90
+      id: '1723442720119'
+      position:
+        x: 2158
+        y: 266
+      positionAbsolute:
+        x: 2158
+        y: 266
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        memory:
+          query_prompt_template: ''
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: true
+            size: 10
+        model:
+          completion_params:
+            enable_thinking: true
+          mode: chat
+          name: qwen3-14b
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: c162dbfd-5159-4df9-9e06-9d638522c6be
+          role: system
+          text: "你是根据提供的记忆回答 {{#sys.query#}} 的专家。你的任务是利用 {{#1723443740666.result#}}\
+            \ 中提供的信息为问题提供准确而简洁的答案。\n指导方针： \n- 根据问题从记忆中提取相关信息。 \n- 如果未找到相关信息，请确保不要说未找到信息。相反，接受问题并提供一般性答复。\
+            \ \n- 确保答案清晰、简洁并直接解决问题。\n确保响应的语言与 {{#sys.query#}} 一致。"
+        selected: false
+        title: 根据记忆回答
+        type: llm
+        variables: []
+        vision:
+          configs:
+            detail: high
+          enabled: false
+      height: 90
+      id: '17234428530880'
+      position:
+        x: 1246
+        y: 403.5
+      positionAbsolute:
+        x: 1246
+        y: 403.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#17234428530880.text#}}'
+        desc: ''
+        selected: false
+        title: Answer (1)
+        type: answer
+        variables: []
+      height: 105
+      id: '17234428657830'
+      position:
+        x: 1550
+        y: 438
+      positionAbsolute:
+        x: 1550
+        y: 438
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\n\ndef main(arg1: list) -> str:\n    try:\n        # Assume\
+          \ arg1[0] is the dictionary we need to process\n        context = arg1[0]\
+          \ if arg1 else {}\n        \n        # Construct the memory object\n   \
+          \     memory = {\"memory\": context}\n        \n        # Convert the object\
+          \ to a JSON string\n        json_str = json.dumps(memory, ensure_ascii=False,\
+          \ indent=2)\n        \n        # Wrap the JSON string in <answer> tags\n\
+          \        result = f\"<answer>{json_str}</answer>\"\n        \n        return\
+          \ {\n            \"result\": result\n        }\n    except Exception as\
+          \ e:\n        return {\n            \"result\": f\"<answer>Error: {str(e)}</answer>\"\
+          \n        }"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 将 object 转义为字符串
+        type: code
+        variables:
+        - value_selector:
+          - conversation
+          - memory
+          variable: arg1
+      height: 54
+      id: '1723443740666'
+      position:
+        x: 942
+        y: 447.5
+      positionAbsolute:
+        x: 942
+        y: 447.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\n\ndef main(arg1: list) -> str:\n    try:\n        # Assume\
+          \ arg1[0] is the dictionary we need to process\n        context = arg1[0]\
+          \ if arg1 else {}\n        \n        # Construct the memory object\n   \
+          \     memory = {\"memory\": context}\n        \n        # Convert the object\
+          \ to a JSON string\n        json_str = json.dumps(memory, ensure_ascii=False,\
+          \ indent=2)\n        \n        # Wrap the JSON string in <answer> tags\n\
+          \        result = f\"<answer>{json_str}</answer>\"\n        \n        return\
+          \ {\n            \"result\": result\n        }\n    except Exception as\
+          \ e:\n        return {\n            \"result\": f\"<answer>Error: {str(e)}</answer>\"\
+          \n        }"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 将object 转义为字符串
+        type: code
+        variables:
+        - value_selector:
+          - conversation
+          - memory
+          variable: arg1
+      height: 54
+      id: '1723444029520'
+      position:
+        x: 1854
+        y: 266
+      positionAbsolute:
+        x: 1854
+        y: 266
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        author: Dify
+        desc: ''
+        height: 184
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"此模板旨在向用户介绍在对话变量中使用数组的方式，以及通过追加进行变量赋值的方法，灵感来源于OpenAI的记忆功能。","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ''
+        type: ''
+        width: 297
+      height: 184
+      id: '1723533992122'
+      position:
+        x: 309.13735192871036
+        y: -57.498059908562624
+      positionAbsolute:
+        x: 309.13735192871036
+        y: -57.498059908562624
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 297
+    - data:
+        author: Dify
+        desc: ''
+        height: 198
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"让大型模型判断用户查询中是否有需要记住的事实、偏好或记忆。如果有，首先沿着上层分支提取并存储这些信息，然后以此作为对话的上下文进行回应。如果没有，则沿着下层分支直接使用之前相关的记忆来回答。","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ' (1)'
+        type: ''
+        width: 317
+      height: 198
+      id: '17235340443870'
+      position:
+        x: 630.6124919776112
+        y: -57.498059908562624
+      positionAbsolute:
+        x: 630.6124919776112
+        y: -57.498059908562624
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 317
+    - data:
+        author: Dify
+        desc: ''
+        height: 210
+        selected: true
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"在这里，我们使用了来自mem0ai的开源提示：
+          https://github.com/mem0ai/mem0/blob/main/mem0/configs/prompts.py 来提取和检索记忆。我们认为记忆由三个部分组成：推导出的事实、偏好和回忆，因此我们使用array[object]来存储会话级变量。","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ''
+        type: ''
+        width: 300
+      height: 210
+      id: '1723534367935'
+      position:
+        x: 971.5004283300959
+        y: -57.498059908562624
+      positionAbsolute:
+        x: 971.5004283300959
+        y: -57.498059908562624
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 300
+    - data:
+        author: Dify
+        desc: ''
+        height: 184
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"首先，由于我们选择了
+          array[object] 类型作为会话变量的数据类型，因此在使用之前需要对模型的输出文本字符串进行转义。当使用对话变量时，我们需要将其插入到
+          LLM 节点的提示中，因此它需要转换为字符串类型。","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ' (1)'
+        type: ''
+        width: 297
+      height: 184
+      id: '17235347344010'
+      position:
+        x: 1302.1215339024086
+        y: -57.498059908562624
+      positionAbsolute:
+        x: 1302.1215339024086
+        y: -57.498059908562624
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 297
+    - data:
+        author: Dify
+        desc: ''
+        height: 194
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"在回应查询时，我们要求节点根据相关记忆进行回答。如果记忆不相关，则应提供一般性回复：您是一个基于提供的记忆进行回答的专家。您的任务是利用所给信息为问题提供准确简洁的答案。指导原则：-
+          根据问题从记忆中提取相关信息。- 如果没有找到相关信息，确保不要说未找到任何信息。相反，要承认问题并提供一般性回复。- 确保答案清晰、简洁，并直接针对问题。确保您的回答语言与这种方法保持一致。","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: '  (2)'
+        type: ''
+        width: 371
+      height: 194
+      id: '17235349280770'
+      position:
+        x: 1638.7289997188407
+        y: -57.498059908562624
+      positionAbsolute:
+        x: 1638.7289997188407
+        y: -57.498059908562624
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 371
+    - data:
+        author: Dify
+        desc: ''
+        height: 207
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"当我们使用记忆时，我们直接将其插入到模型的上下文中同时，会话级变量不会在后续问答之前作为向量存储在向量数据库中以进行语义检索。在实际场景中，需要更多的分支逻辑来更新和维护记忆。此外，当总记忆量超过模型的上下文时，应该使用RAG，使得大型语言模型能够用最相关的记忆作出回应。总之，这是一个非常简单的案例，我期待看到社区对对话变量更多的应用！","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: yellow
+        title: '  (2)'
+        type: ''
+        width: 335
+      height: 207
+      id: '17235350709980'
+      position:
+        x: 2053.98197883731
+        y: -57.498059908562624
+      positionAbsolute:
+        x: 2053.98197883731
+        y: -57.498059908562624
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 335
+    viewport:
+      x: 55.4328163341367
+      y: 323.26229180256
+      zoom: 0.6868181167148123
